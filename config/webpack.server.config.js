@@ -25,25 +25,32 @@ module.exports = {
         test: /\.(css|less|styl|scss|sass|sss)$/,
         exclude: /node_modules/,
         use: [
-          "isomorphic-style-loader",
           {
             loader: "css-loader",
             options: {
               importLoaders: 1,
+              modules: {
+                mode: "local",
+                localIdentName: "[name]__[local]--[hash:base64:5]",
+                exportOnlyLocals: true,
+              },
             },
           },
-          "postcss-loader",
         ],
       },
       {
         test: /\.(css|less|styl|scss|sass|sss)$/,
         include: /node_modules/,
         use: [
-          "isomorphic-style-loader",
           {
             loader: "css-loader",
             options: {
               importLoaders: 1,
+              modules: {
+                mode: "local",
+                localIdentName: "[name]__[local]--[hash:base64:5]",
+              },
+              exportOnlyLocals: true,
             },
           },
           "postcss-loader",

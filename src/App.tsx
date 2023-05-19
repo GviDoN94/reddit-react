@@ -1,9 +1,13 @@
 import React from "react";
 import { hot } from "react-hot-loader/root";
+import { Layout } from "./shared/Layout/Layout";
 
 function AppComponent() {
     return (
-        <div>content</div>
+        <Layout>
+            content
+        </Layout>
+        // <Header/>
     )
 }
 

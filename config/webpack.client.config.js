@@ -38,7 +38,18 @@ module.exports = {
         // Preprocess our own style files
         test: /\.(css|less|styl|scss|sass|sss)$/,
         exclude: /node_modules/,
-        use: ["style-loader", "css-loader"],
+        use: [
+          "style-loader",
+          {
+            loader: "css-loader",
+            options: {
+              modules: {
+                mode: "local",
+                localIdentName: "[name]__[local]--[hash:base64:5]",
+              },
+            },
+          },
+        ],
       },
       {
         // Preprocess 3rd party style files located in node_modules
