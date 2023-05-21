@@ -1,6 +1,5 @@
 import React, { ReactNode } from "react";
 import styles from './layout.css';
-import { Header } from "../Header/Header";
 
 
 interface ILayoutProps {
@@ -10,7 +9,7 @@ interface ILayoutProps {
 export function Layout({ children }: ILayoutProps) {
   return (
     <div className={styles.layout}>
-      <Header />
+      {children}
     </div>
   );
 }
