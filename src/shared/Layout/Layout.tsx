@@ -1,15 +1,16 @@
 import React, { ReactNode } from "react";
-import styles from'./layout.scss';
+import styles from './layout.css';
+import { Header } from "../Header/Header";
+
 
 interface ILayoutProps {
-    children?: ReactNode
+  children?: ReactNode
 }
 
-export function Layout({children}: ILayoutProps) {
-    console.log(styles);
-    return (
-        <div className={styles.layout}>
-            {children}
-        </div>
-    );
+export function Layout({ children }: ILayoutProps) {
+  return (
+    <div className={styles.layout}>
+      <Header />
+    </div>
+  );
 }

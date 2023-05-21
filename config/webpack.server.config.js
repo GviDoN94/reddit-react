@@ -1,6 +1,7 @@
 const path = require("path");
 const nodeExternals = require("webpack-node-externals");
 const NODE_ENV = process.env.NODE_ENV;
+const GLOBAL_CSS_REGEXP = /\.global\.css$/;
 
 module.exports = {
   target: "node",
@@ -17,56 +18,28 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(tsx|ts|js|jsx|mjs)$/,
-        exclude: /node_modules/,
-        use: "babel-loader",
+        test: /\.[tj]sx?$/,
+        use: ["ts-loader"],
       },
       {
-        test: /\.(css|less|styl|scss|sass|sss)$/,
-        exclude: /node_modules/,
+        test: /\.css$/,
         use: [
           {
             loader: "css-loader",
             options: {
-              importLoaders: 1,
-              modules: {
-                mode: "local",
-                localIdentName: "[name]__[local]--[hash:base64:5]",
-                exportOnlyLocals: true,
-              },
-            },
-          },
-        ],
-      },
-      {
-        test: /\.(css|less|styl|scss|sass|sss)$/,
-        include: /node_modules/,
-        use: [
-          {
-            loader: "css-loader",
-            options: {
-              importLoaders: 1,
               modules: {
                 mode: "local",
                 localIdentName: "[name]__[local]--[hash:base64:5]",
               },
-              exportOnlyLocals: true,
+              onlyLocals: true,
             },
           },
-          "postcss-loader",
         ],
+        exclude: GLOBAL_CSS_REGEXP,
       },
       {
-        test: /\.(eot|otf|ttf|woff|woff2)$/,
-        type: "asset",
-      },
-      {
-        test: /\.svg/,
-        type: "asset/inline",
-      },
-      {
-        test: /\.(bmp|gif|jpg|jpeg|png)$/,
-        type: "asset/resource",
+        test: GLOBAL_CSS_REGEXP,
+        use: ["css-loader"],
       },
     ],
   },

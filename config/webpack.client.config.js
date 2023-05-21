@@ -5,6 +5,7 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const NODE_ENV = process.env.NODE_ENV;
 const IS_DEV = NODE_ENV === "development";
 const IS_PROD = NODE_ENV === "production";
+const GLOBAL_CSS_REGEXP = /\.global\.css$/;
 
 function setupDevtool() {
   if (IS_DEV) return "eval";
@@ -30,14 +31,11 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(tsx|ts|js|jsx|mjs)$/,
-        exclude: /node_modules/,
-        use: "babel-loader",
+        test: /\.[tj]sx?$/,
+        use: ["ts-loader"],
       },
       {
-        // Preprocess our own style files
-        test: /\.(css|less|styl|scss|sass|sss)$/,
-        exclude: /node_modules/,
+        test: /\.css$/,
         use: [
           "style-loader",
           {
@@ -50,24 +48,11 @@ module.exports = {
             },
           },
         ],
+        exclude: GLOBAL_CSS_REGEXP,
       },
       {
-        // Preprocess 3rd party style files located in node_modules
-        test: /\.(css|less|styl|scss|sass|sss)$/,
-        include: /node_modules/,
+        test: GLOBAL_CSS_REGEXP,
         use: ["style-loader", "css-loader"],
-      },
-      {
-        test: /\.(eot|otf|ttf|woff|woff2)$/,
-        type: "asset",
-      },
-      {
-        test: /\.svg/,
-        type: "asset/inline",
-      },
-      {
-        test: /\.(bmp|gif|jpg|jpeg|png)$/,
-        type: "asset/resource",
       },
     ],
   },
