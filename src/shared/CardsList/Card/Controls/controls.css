@@ -15,6 +15,30 @@
   margin: 0 0 0 13px;
 }
 
+.commentsButton {
+  display: flex;
+  align-items: normal;
+}
+.commentsButton * {
+  color: var(--greyC4);
+}
+
+.commentsNumber {
+  padding: 0 0 0 6px;
+  font-size: 12px;
+  line-height: 14px;
+}
+
+.shareButton {
+  width: 20px;
+  height: 20px;
+}
+
+.saveButton {
+  width: 20px;
+  height: 20px;
+}
+
 @media all and (min-width: 1024px) {
   .controls {
     order: 3;
@@ -23,6 +47,10 @@
   }
 
   .actions {
+    display: none;
+  }
+
+  .commentsButton {
     display: none;
   }
 }
